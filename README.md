@@ -1,4 +1,4 @@
-# L05 – Smart Cities and AI
+# L07 – Sentiment and Emotion Analysis
 
 **Course:** ITAI 2373 | Houston Community College  
 **Student:** Robert B. Thompson  
@@ -9,36 +9,48 @@
 
 ## Problem Statement
 
-Analyze how AI is deployed in urban infrastructure and examine the tradeoff between operational efficiency and civil privacy.
+Build a complete emotion detection system that works on both text and speech. Apply multiple sentiment analysis methods, compare their outputs, and extend the system to audio input.
 
-## Key Topics
+## Approach
 
-**Traffic and Emergency Services**  
-AI systems adjust signal timing in real time, route emergency vehicles around congestion, and predict traffic spikes using school schedules, holidays, and event data.
+1. Applied VADER for rule-based polarity scoring on text
+2. Applied TextBlob for polarity and subjectivity scores
+3. Trained a logistic regression classifier on TF-IDF features for longer reviews
+4. Extracted audio features (MFCCs, pitch, energy) using librosa for speech emotion classification
 
-**Public Safety**  
-Gunshot detection microphones classify sounds and alert officers automatically. License plate readers track suspect vehicles without a chase. Facial recognition cross-references footage against driver's license databases and tracks movement patterns across multiple camera feeds.
+## Key Results
 
-**Infrastructure Monitoring**  
-AI watches water pipes, gas lines, roads, and bridges for signs of wear before failures occur. Street lights adjust based on presence detection.
-
-**Citizen Services**  
-311 AI chatbots triage requests (potholes, icy roads, broken signs) and route them to the right crew faster than legacy manual systems.
-
-**The Privacy Tradeoff**  
-Phone, laptop, smart TV, and city camera data gets stored by governments and companies for 3–7 years and is subject to subpoena. Edward Snowden's disclosures showed how deep government surveillance already runs. Ben Franklin's warning applies: people who give up freedom for safety end up losing both.
+- VADER scored compound sentiment on a −1 to +1 scale without requiring training data
+- TextBlob provided polarity and subjectivity scores efficiently on short text
+- TF-IDF + logistic regression outperformed VADER on longer, structured reviews
+- librosa extracted mel-frequency cepstral coefficients and pitch features from audio files for emotion classification
 
 ## Learning Outcomes
 
-- AI in cities improves response times, resource allocation, and infrastructure reliability
-- Every efficiency gain comes with a privacy cost at scale
-- Surveillance systems generate data retention that outlasts any single incident
-- Domain-specific NLP (speech recognition, entity extraction) is central to smart city operations
+- VADER works best on social media and informal text with strong polarity signals
+- TextBlob subjectivity scores add a dimension VADER does not provide
+- ML classifiers on TF-IDF features generalize better when labeled training data is available
+- Audio emotion analysis parallels text emotion analysis: both extract features, then classify
 
 ## Files
 
-- `Thompson_RB_L05.docx` – Written analysis
+- `L07_Robert_Langdon_Thompson_Sentiment_Emotion_Analysis_.ipynb` – Lab notebook
 
 ## Dependencies
 
-None. Written analysis assignment.
+```
+vaderSentiment
+textblob
+scikit-learn
+pandas
+numpy
+matplotlib
+seaborn
+librosa
+soundfile
+```
+
+```bash
+pip install vaderSentiment textblob librosa soundfile
+python -m textblob.download_corpora
+```
