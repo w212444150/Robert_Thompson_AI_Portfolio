@@ -1,4 +1,4 @@
-# L02 – Text Preprocessing and Cleaning
+# L04 – Text Representation: From Words to Numbers
 
 **Course:** ITAI 2373 | Houston Community College  
 **Student:** Robert B. Thompson  
@@ -9,43 +9,46 @@
 
 ## Problem Statement
 
-Compare NLTK and spaCy preprocessing pipelines and understand how each preprocessing decision affects downstream NLP tasks.
+Convert raw text into numerical representations that machine learning models can process. Implement and compare Bag of Words, TF-IDF, and Word2Vec on a movie review dataset.
 
 ## Approach
 
-Applied tokenization, stemming, lemmatization, and stop word removal to two corpora: product reviews and academic text. Measured vocabulary reduction at each step and evaluated tradeoffs between compression and meaning preservation.
+Progressed through three levels of text representation on the same corpus:
+1. Bag of Words using `CountVectorizer`
+2. TF-IDF weighting using `TfidfVectorizer`
+3. Word2Vec dense embeddings using `gensim`
 
-## Results
+Visualized vocabulary distributions and compared how each method encodes meaning.
 
-| Corpus | Vocabulary Reduction |
-|--------|---------------------|
-| Product reviews | ~61.7% |
-| Academic text | ~57.4% |
+## Key Results
 
-- Stemming produced broken tokens: `batteri`, `absolut`, `wa`
-- Lemmatization preserved root meaning: `battery`, `absolute`, `be`
-- Removing `almost` from "almost nobody likes spam" flips the meaning entirely
+- BoW produces sparse matrices where "the" and "ransomware" get equal weight
+- TF-IDF down-weights common words and surfaces rare, informative terms
+- Word2Vec captures analogy relationships: king − man + woman ≈ queen
 
 ## Learning Outcomes
 
-- Preprocessing choices are decisions, not defaults; the right approach depends on the task
-- NLTK is lighter and faster; spaCy provides richer tagging out of the box
-- Stemming follows blunt rules and produces unreadable output; lemmatization understands language
-- Stop word removal needs context: intensity words and negations often carry meaning
+- Bag of Words ignores word order and context; works well for simple classification
+- TF-IDF improves on BoW for information retrieval and topic-based tasks
+- Dense embeddings from Word2Vec encode semantic similarity in a vector space
+- Sparse methods (BoW, TF-IDF) scale better on large corpora; dense embeddings need more compute
 
 ## Files
 
-- `L02_Robert_B_Thompson_ITAI_2373.ipynb` – Preprocessing lab notebook
+- `R_B_Thompson_L04_ITAI_2373.ipynb` – Text representation lab notebook
 
 ## Dependencies
 
 ```
 nltk
-spacy
+scikit-learn
+gensim
+matplotlib
+seaborn
+wordcloud
 ```
 
 ```bash
-pip install nltk spacy
-python -m spacy download en_core_web_sm
-import nltk; nltk.download('punkt'); nltk.download('stopwords')
+pip install nltk gensim scikit-learn matplotlib seaborn wordcloud
+python -m nltk.downloader punkt stopwords movie_reviews
 ```
